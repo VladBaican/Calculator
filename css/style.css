@@ -1,0 +1,67 @@
+.calculator-ct {
+  height: 401px;
+  width: 300px;
+  background-color: rgb(112, 132, 150);
+  margin: 150px auto 0 auto;
+  border-radius: 5px;
+}
+
+.result-ct {
+  height: 70px;
+  text-align: right;
+  font-size: 60px;
+  color: white;
+  padding: 30px 15px 0 0;
+}
+
+.button {
+  cursor: pointer;
+  width: 25%;
+  height: 60px;
+  display: inline;
+  float: left;
+  border-top: 1px solid rgb(112, 132, 150);
+  border-left: 1px solid rgb(112, 132, 150);
+  font-size: 30px;
+  text-align: center;
+  padding-top: 11px;
+  box-sizing: border-box;
+}
+
+.button.number-btn {
+  background-color: rgb(224, 224, 224);
+}
+
+.button.number-btn:active {
+  background-color: rgb(178, 178, 178);
+}
+
+.button.function-btn {
+  background-color: rgb(214, 214, 214);
+}
+
+.button.function-btn:active {
+  background-color: rgb(169, 169, 169);
+}
+
+.button.operation-btn {
+  background-color: rgb(245,146,68);
+  color: white;
+  border-right:1px solid rgb(112, 132, 150);
+}
+
+.button.operation-btn:active {
+  background-color: rgb(194, 115, 47);
+  color: rgb(85, 85, 85);
+}
+
+.button.number-btn.large-btn {
+  width: 50%;
+  border-bottom-left-radius: 5px;
+  text-align: left;
+  padding-left: 30px;
+}
+
+.button.operation-btn.operation-eq-btn {
+  border-bottom-right-radius: 5px;
+}
