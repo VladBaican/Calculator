@@ -2,30 +2,32 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="../javascript/jQuerry.js"></script>
   </head>
   <body>
-    <div class="calculator-ct">
-      <div class="result-ct">0</div>
+    <div class="calculator-ct calculatorCt">
+      <div class="result-ct resultCt">0</div>
       <div class="buttons-ct">
-        <div class="button function-btn">C</div
-        <div class="button function-btn">+/-</div>
-        <div class="button function-btn">%</div>
-        <div class="button operation-btn">/</div>
-        <div class="button number-btn">7</div>
-        <div class="button number-btn">8</div>
-        <div class="button number-btn">9</div>
-        <div class="button operation-btn">x</div>
-        <div class="button number-btn">4</div>
-        <div class="button number-btn">5</div>
-        <div class="button number-btn">6</div>
-        <div class="button operation-btn">-</div>
-        <div class="button number-btn">1</div>
-        <div class="button number-btn">2</div>
-        <div class="button number-btn">3</div>
-        <div class="button operation-btn">+</div>
-        <div class="button number-btn large-btn">0</div>
-        <div class="button number-btn">,</div>
-        <div class="button operation-btn operation-eq-btn">=</div>
+        <div class="button function-btn functionBtn clearBtn" data-value="ac">AC</div>
+        <div class="button function-btn functionBtn" data-value="+/-">+/-</div>
+        <div class="button function-btn functionBtn" data-value="%">%</div>
+        <div class="button operation-btn operationBtn" data-value="/">/</div>
+        <div class="button number-btn numberBtn" data-value="7">7</div>
+        <div class="button number-btn numberBtn" data-value="8">8</div>
+        <div class="button number-btn numberBtn" data-value="9">9</div>
+        <div class="button operation-btn operationBtn" data-value="x">x</div>
+        <div class="button number-btn numberBtn" data-value="4">4</div>
+        <div class="button number-btn numberBtn" data-value="5">5</div>
+        <div class="button number-btn numberBtn" data-value="6">6</div>
+        <div class="button operation-btn operationBtn" data-value="-">-</div>
+        <div class="button number-btn numberBtn" data-value="1">1</div>
+        <div class="button number-btn numberBtn" data-value="2">2</div>
+        <div class="button number-btn numberBtn" data-value="3">3</div>
+        <div class="button operation-btn operationBtn"  data-value="+">+</div>
+        <div class="button number-btn large-btn numberBtn" data-value="0">0</div>
+        <div class="button number-btn decimalBtn" data-value=",">,</div>
+        <div class="button operation-btn operation-eq-btn operationBtn" data-value="=">=</div>
       </div>
     </div>
   </body>
