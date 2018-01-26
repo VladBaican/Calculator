@@ -34,11 +34,13 @@ $(document).ready(function() {
     switch (stack.length) {
       case 0:
       case 2:
+      case 4:
         stack.push(buttonValue);
         resultValue = buttonValue;
         break;
       case 1:
       case 3:
+      case 5:
         resultValue = +(stack.pop());
         resultValue = resultValue * 10 + buttonValue;
         stack.push(resultValue);
@@ -54,6 +56,10 @@ $(document).ready(function() {
       case '-':
         onTypeIOperationButtonClick(button, buttonValue);
         break;
+      case '*':
+      case '/':
+        onTypeIIOperationButtonClick(button, buttonValue);
+        break;
       case '=':
         onEqualButtonClick();
         break;
@@ -67,8 +73,7 @@ $(document).ready(function() {
   }
 
   function onTypeIOperationButtonClick(button, operation) {
-    var num1, op1, num2;
-
+    var num1, op1, num2, op2, num3, res;
     switch (stack.length) {
       case 1:
         stack.push(operation);
@@ -85,11 +90,56 @@ $(document).ready(function() {
         stack.push(resultValue);
         stack.push(operation);
         break;
+      case 5:
+        num3 = stack.pop();
+        op2 = stack.pop();
+        num2 = stack.pop();
+        op1 = stack.pop();
+        num1 = stack.pop();
+
+        res = executeOperation(num2, op2, num3);
+        resultValue = executeOperation(num1, op1, res);
+        stack.push(resultValue);
+        stack.push(operation);
+    }
+  }
+
+  function onTypeIIOperationButtonClick(button, operation) {
+    var num1, op1, num2;
+    console.log("hello");
+    switch(stack.length){
+      case 1:
+        stack.push(operation);
+        break;
+      case 2: case 4:
+        stack.pop();
+        stack.push(operation);
+        break;
+      case 3:
+        if(stack[1] == "*" || stack[1] == "/") {
+          num2 = stack.pop();
+          op1 = stack.pop();
+          num1 = stack.pop();
+          resultValue = operation(num1, op1, num2);
+          stack.push(resultValue);
+          stack.push(operation);
+        }
+        else {
+          stack.push(operation);
+        }
+        break;
+      case 5:
+        num2 = stack.pop();
+        op1 = stack.pop();
+        num1 = stack.pop();
+        resultValue = executeOperation(num1, op1, num2);
+        stack.push(resultValue );
+        stack.push(operation);
     }
   }
 
   function onEqualButtonClick() {
-    var num1, op1, num2;
+    var num1, op1, num2, op2, num3, res;
 
     switch (stack.length) {
       case 2:
@@ -105,6 +155,16 @@ $(document).ready(function() {
         resultValue = executeOperation(num1, op1, num2);
         stack.push(resultValue);
         break;
+      case 5:
+        num3 = stack.pop();
+        op2 = stack.pop();
+        num2 = stack.pop();
+        op1 = stack.pop();
+        num1 = stack.pop();
+
+        res = executeOperation(num2, op2, num3);
+        resultValue = executeOperation(num1, op1, res);
+        stack.push(resultValue);
     }
   }
 
@@ -135,7 +195,7 @@ $(document).ready(function() {
       case '-':
         return num1 - num2;
       case '*':
-        return num * num2;
+        return num1 * num2;
       case '/':
         return num1 / num2;
     }
