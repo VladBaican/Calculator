@@ -1,6 +1,28 @@
 
 var stack = [];
 
+function countNrDecimals(num) {
+  let flag = false;
+  let nrDec = 0;
+
+  try{
+    for(var i of num) {
+      if(flag) {
+        nrDec++;
+      }
+      if(i == ".") {
+        flag = true;
+      }
+    }
+  }
+  catch(TypeError) {}
+
+  if(!flag){
+    return -1;
+  }
+  return nrDec;
+}
+
 function isNumeric(num){
   return !isNaN(num)
 }
@@ -52,7 +74,8 @@ $(document).ready(function() {
           case 1:
             stack.push("+");
             break;
-          case 2: case 4:
+          case 2:
+          case 4:
             stack.pop();
             stack.push("+");
             break;
@@ -114,7 +137,8 @@ $(document).ready(function() {
           case 1:
             stack.push("x");
             break;
-          case 2: case 4:
+          case 2:
+          case 4:
             stack.pop();
             stack.push("*");
             break;
@@ -147,7 +171,8 @@ $(document).ready(function() {
           case 1:
             stack.push("/");
             break;
-          case 2: case 4:
+          case 2:
+          case 4:
             stack.pop();
             stack.push("/");
             break;
@@ -206,20 +231,54 @@ $(document).ready(function() {
       }
 
       if(isNumeric(buttonValue)){
+        let nrDec = countNrDecimals(stack[stack.length-1]);
+
+        if(nrDec == -1) {
+          switch(stack.length){
+            case 0:
+            case 2:
+            case 4:
+              stack.push(buttonValue);
+              resultValue  = buttonValue;
+              break;
+            case 1:
+            case 3:
+            case 5:
+              resultValue = stack.pop();
+              resultValue = +resultValue*10 + +buttonValue;
+              stack.push(resultValue);
+              break;
+          }
+        }
+        else {
+          num1 = stack.pop();
+          resultValue = "" + num1 + buttonValue;
+          stack.push(resultValue);
+        }
+      }
+
+      if(buttonValue == "."){
         switch(stack.length){
-          case 0: case 2: case 4:
-            stack.push(buttonValue);
-            resultValue  = buttonValue;
+          case 0:
+          case 2:
+          case 4:
+            res = 0;
+            stack.push(res+".");
+            resultValue = res+".";
             break;
-          case 1: case 3: case 5:
-            resultValue = stack.pop();
-            resultValue = +resultValue*10 + +buttonValue;
-            stack.push(resultValue);
+          case 1:
+          case 3:
+          case 5:
+            if (countNrDecimals($(result).text()) == -1) {
+              num = stack.pop($(result).text());
+              stack.push(num+".");
+              resultValue = num + ".";
+            }
             break;
         }
       }
-      //console.log(stack.length +" -> "+stack);
+
       $(result).text(resultValue);
     })
   }
-})
+});
