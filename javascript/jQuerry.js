@@ -12,7 +12,7 @@ function operation(num1, op, num2) {
     return num1+num2;
   if( op == "-" )
     return num1-num2;
-  if( op == "*" )
+  if( op == "x" )
     return num1*num2;
   if( op == "/" )
     return num1/num2;
@@ -27,6 +27,9 @@ $(document).ready(function() {
   var buttonValue;
   var resultValue;
   var clearButton = keys[0];
+
+  //variables for operations
+  var num1,op1,num2,op2,num3,res;
 
   var nrOfButtons = keys.length;
   for(let i = 0; i < nrOfButtons; i++) {
@@ -49,18 +52,29 @@ $(document).ready(function() {
           case 1:
             stack.push("+");
             break;
-          case 2:
+          case 2: case 4:
             stack.pop();
             stack.push("+");
             break;
           case 3:
-            let num2 = stack.pop();
-            let op = stack.pop();
-            let num1 = stack.pop();
-            stack.push(operation(num1, op, num2));
+            num2 = stack.pop();
+            op1 = stack.pop();
+            num1 = stack.pop();
+            stack.push(operation(num1, op1, num2));
             stack.push("+");
-            resultValue = operation(num1, op, num2);
+            resultValue = operation(num1, op1, num2);
             break;
+          case 5:
+            num3 = stack.pop();
+            op2 = stack.pop();
+            num2 = stack.pop();
+            op1 = stack.pop();
+            num1 = stack.pop();
+
+            res = operation(num2, op2, num3);
+            resultValue = operation(num1, op1, res);
+            stack.push(resultValue);
+            stack.push("+");
         }
       }
 
@@ -74,48 +88,137 @@ $(document).ready(function() {
             stack.push("-");
             break;
           case 3:
-            let num2 = stack.pop();
-            let op = stack.pop();
-            let num1 = stack.pop();
-            stack.push(operation(num1, op, num2));
+            num2 = stack.pop();
+            op1 = stack.pop();
+            num1 = stack.pop();
+            stack.push(operation(num1, op1, num2));
             stack.push("-");
-            resultValue = operation(num1, op, num2);
+            resultValue = operation(num1, op1, num2);
             break;
+          case 5:
+            num3 = stack.pop();
+            op2 = stack.pop();
+            num2 = stack.pop();
+            op1 = stack.pop();
+            num1 = stack.pop();
+
+            res = operation(num2, op2, num3);
+            resultValue = operation(num1, op1, res);
+            stack.push(resultValue);
+            stack.push("-");
         }
       }
+
+      if(buttonValue == "x") {
+        switch(stack.length){
+          case 1:
+            stack.push("x");
+            break;
+          case 2: case 4:
+            stack.pop();
+            stack.push("*");
+            break;
+          case 3:
+            if(stack[1]=="x" || stack[1]=="/") {
+              num2 = stack.pop();
+              op1 = stack.pop();
+              num1 = stack.pop();
+              stack.push(operation(num1, op1, num2));
+              stack.push("x");
+              resultValue = operation(num1, op1, num2);
+            }
+            else
+            {
+              stack.push("x");
+            }
+            break;
+          case 5:
+            num2 = stack.pop();
+            op1 = stack.pop();
+            num1 = stack.pop();
+            stack.push(operation(num1, op1, num2));
+            stack.push("x");
+            resultValue = operation(num1, op1, num2);
+        }
+      }
+
+      if(buttonValue == "/") {
+        switch(stack.length){
+          case 1:
+            stack.push("/");
+            break;
+          case 2: case 4:
+            stack.pop();
+            stack.push("/");
+            break;
+          case 3:
+            if(stack[1]=="x" || stack[1]=="/") {
+              num2 = stack.pop();
+              op1 = stack.pop();
+              num1 = stack.pop();
+              stack.push(operation(num1, op1, num2));
+              stack.push("/");
+              resultValue = operation(num1, op1, num2);
+            }
+            else
+            {
+              stack.push("/");
+            }
+            break;
+          case 5:
+            num2 = stack.pop();
+            op1 = stack.pop();
+            num1 = stack.pop();
+            stack.push(operation(num1, op1, num2));
+            stack.push("/");
+            resultValue = operation(num1, op1, num2);
+        }
+      }
+
 
       if(buttonValue == "=") {
         switch(stack.length){
           case 2:
-            let ope = stack.pop();
-            let num = stack.pop();
-            stack.push(operation(num, ope, num));
-            resultValue = operation(num, ope, num);
+            op1 = stack.pop();
+            num1 = stack.pop();
+            stack.push(operation(num1, op1, num1));
+            resultValue = operation(num1, op1, num1);
             break;
           case 3:
-            let num2 = stack.pop();
-            let op = stack.pop();
-            let num1 = stack.pop();
-            stack.push(operation(num1, op, num2));
-            resultValue = operation(num1, op, num2);
+            num2 = stack.pop();
+            op1 = stack.pop();
+            num1 = stack.pop();
+            stack.push(operation(num1, op1, num2));
+            resultValue = operation(num1, op1, num2);
             break;
+          case 5:
+            num3 = stack.pop();
+            op2 = stack.pop();
+            num2 = stack.pop();
+            op1 = stack.pop();
+            num1 = stack.pop();
+
+            let res = operation(num2, op2, num3);
+            resultValue = operation(num1, op1, res);
+            stack.push(resultValue);
         }
+
       }
 
       if(isNumeric(buttonValue)){
         switch(stack.length){
-          case 0: case 2:
+          case 0: case 2: case 4:
             stack.push(buttonValue);
             resultValue  = buttonValue;
             break;
-          case 1: case 3:
+          case 1: case 3: case 5:
             resultValue = stack.pop();
             resultValue = +resultValue*10 + +buttonValue;
             stack.push(resultValue);
             break;
         }
       }
-
+      //console.log(stack.length +" -> "+stack);
       $(result).text(resultValue);
     })
   }
