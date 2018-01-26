@@ -278,6 +278,38 @@ $(document).ready(function() {
         }
       }
 
+      if(buttonValue == "%"){
+        switch(stack.length){
+          case 1:
+          case 3:
+          case 5:
+            num1 = stack.pop()
+            num1 /= 100;
+            stack.push(num1);
+            resultValue = num1;
+            break;
+        }
+      }
+
+      if(buttonValue == "+/-"){
+        switch(stack.length){
+          case 1:
+          case 3:
+          case 5:
+            num1 = stack.pop()
+
+            if(num1<0) {
+              num1 = Math.abs(num1);
+            }
+            else {
+              num1 = num1 - num1*2
+            }
+
+            stack.push(num1);
+            resultValue = num1;
+            break;
+        }
+      }
       $(result).text(resultValue);
     })
   }
