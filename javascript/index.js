@@ -316,14 +316,185 @@ $(document).ready(function() {
 });
 
 document.addEventListener('keydown', function(event) {
-  if (event.code.indexOf("Digit") != -1) {
-    var keys = $(document).find('.button');
-    var nrOfButtons = keys.length;
+  var keys = $(document).find('.button');
+  var nrOfButtons = keys.length;
+
+  if (isNumeric(event.key)) {
     for(let i = 0; i < nrOfButtons; i++) {
-      if ( $(keys[i]).text() == event.code.charAt(5) ) {
+      if ( $(keys[i]).text() == event.key ) {
+        $(keys[i]).addClass('activate');
         $(keys[i]).click();
       }
     }
-
   }
+
+  if (event.key == "%") {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == "%" ) {
+        $(keys[i]).addClass('activate');
+        $(keys[i]).click();
+      }
+    }
+  }
+
+  if (event.code == "Escape") {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == "C" ) {
+        $(keys[i]).addClass('activate');
+        $(keys[i]).click();
+      }
+    }
+  }
+
+  if (event.code == "Period") {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == "." ) {
+        $(keys[i]).addClass('activate');
+        $(keys[i]).click();
+      }
+    }
+  }
+
+  if (event.key == "=" || event.code == "Enter") {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == "=" ) {
+        $(keys[i]).addClass('activate');
+        $(keys[i]).click();
+      }
+    }
+  }
+
+  if (event.code == "Minus") {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == "-" ) {
+        $(keys[i]).addClass('activate');
+        $(keys[i]).click();
+      }
+    }
+  }
+
+  if (event.code == "Slash") {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == "/" ) {
+        $(keys[i]).addClass('activate');
+        $(keys[i]).click();
+      }
+    }
+  }
+
+  if (event.key == "*") {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == "x" ) {
+        $(keys[i]).addClass('activate');
+        $(keys[i]).click();
+      }
+    }
+  }
+
+  if (event.code == 'Backquote') {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == "+/-" ) {
+        $(keys[i]).addClass('activate');
+        $(keys[i]).click();
+      }
+    }
+  }
+
+  if (event.key == "+") {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == "+" ) {
+        $(keys[i]).addClass('activate');
+        $(keys[i]).click();
+      }
+    }
+  }
+
+});
+
+
+
+document.addEventListener('keyup', function(event) {
+  var keys = $(document).find('.button');
+  var nrOfButtons = keys.length;
+
+  if (isNumeric(event.key)) {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == event.key ) {
+        $(keys[i]).removeClass('activate');
+      }
+    }
+  }
+
+  if (event.key == "%") {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == "%" ) {
+        $(keys[i]).removeClass('activate');
+      }
+    }
+  }
+
+  if (event.code == "Escape") {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == "AC" ) {
+        $(keys[i]).removeClass('activate');
+      }
+    }
+  }
+
+  if (event.code == "Period") {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == "." ) {
+        $(keys[i]).removeClass('activate');
+      }
+    }
+  }
+
+  if (event.key == "=" || event.code == "Enter") {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == "=" ) {
+        $(keys[i]).removeClass('activate');
+      }
+    }
+  }
+
+  if (event.code == "Minus") {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == "-" ) {
+        $(keys[i]).removeClass('activate');
+      }
+    }
+  }
+
+  if (event.code == "Slash") {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == "/" ) {
+        $(keys[i]).removeClass('activate');
+      }
+    }
+  }
+
+  if (event.key == "*") {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == "x" ) {
+        $(keys[i]).removeClass('activate');
+      }
+    }
+  }
+
+  if (event.code == 'Backquote') {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == "+/-" ) {
+        $(keys[i]).removeClass('activate');
+      }
+    }
+  }
+
+  if (event.key == "+") {
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == "+" ) {
+        $(keys[i]).removeClass('activate');
+      }
+    }
+  }
+
 });
