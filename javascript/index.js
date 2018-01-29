@@ -314,3 +314,16 @@ $(document).ready(function() {
     })
   }
 });
+
+document.addEventListener('keydown', function(event) {
+  if (event.code.indexOf("Digit") != -1) {
+    var keys = $(document).find('.button');
+    var nrOfButtons = keys.length;
+    for(let i = 0; i < nrOfButtons; i++) {
+      if ( $(keys[i]).text() == event.code.charAt(5) ) {
+        $(keys[i]).click();
+      }
+    }
+
+  }
+});
